@@ -1,0 +1,27 @@
+{
+  "name": "mototehna-backend",
+  "version": "1.0.0",
+  "description": "Restful API for mototehna",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avrhovac92/mototehna-backend.git"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Aleksandar Vrhovac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avrhovac92/mototehna-backend/issues"
+  },
+  "homepage": "https://github.com/avrhovac92/mototehna-backend#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
