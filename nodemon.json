@@ -1,5 +1,6 @@
 {
   "env": {
-    "DB_PASSWORD": "mototehna"
+    "DB_PASSWORD": "mototehna",
+    "JWT_KEY": "m0r3_3l4b0r4t3_str1ng_th4n_th4t"
   }
 }

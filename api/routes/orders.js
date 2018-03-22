@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth');
 
 const Order = require('../models/order');
 const Product = require('../models/product');
 
-router.get('/', async (req, res, next) => {
+router.get('/', checkAuth, async (req, res, next) => {
   try {
     const order = await Order.find()
       .select('_id product quantity')
@@ -17,7 +18,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkAuth, async (req, res, next) => {
   try {
     const product = await Product.findById(req.body.productId);
     if (!product) {
@@ -33,13 +34,13 @@ router.post('/', async (req, res, next) => {
     });
     const result = await order.save();
     const { __v, ...savedOrder } = result._doc;
-    return res.status(201).json({ ...savedOrder });
+    return res.status(201).json(savedOrder);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 });
 
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:orderId', checkAuth, async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.orderId)
       .populate('product', '_id name price')
@@ -55,7 +56,7 @@ router.get('/:orderId', async (req, res, next) => {
   }
 });
 
-router.delete('/:orderId', async (req, res, next) => {
+router.delete('/:orderId', checkAuth, async (req, res, next) => {
   try {
     await Order.remove({ _id: req.params.productId }).exec();
     return res.status(200).json({
