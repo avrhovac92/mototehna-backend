@@ -29,7 +29,14 @@ router.post('/signup', async (req, res, next) => {
     try {
       const result = await user.save();
       const { __v, password, ...savedUser } = result._doc;
-      return res.status(201).json(savedUser);
+      return res.status(201).json({
+        ...savedUser,
+        token: jwt.sign(
+          { email: savedUser.email, userId: savedUser._id },
+          process.env.JWT_KEY,
+          {}
+        )
+      });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
