@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/users');
+const contactRoutes = require('./api/routes/contacts');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mototehna', {});
 mongoose.Promise = global.Promise;
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 // Routes which sould handle requests
+app.use('/api/contact', contactRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
