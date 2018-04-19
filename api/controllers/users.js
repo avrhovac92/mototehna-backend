@@ -80,3 +80,17 @@ exports.deleteUser = async (req, res, next) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+//Patch User
+
+exports.patchUser = async (req, res, next) => {
+  try {
+    const user = await User.update({ _id: req.params.id }, {...req.body}).exec();
+    return res.status(200).json({
+      message: `Patched user: ${req.params.userid}`,
+      user: req.body
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};

@@ -9,4 +9,9 @@ router.post('/signin', UsersController.signIn);
 
 // router.delete('/:userId', UsersController.deleteUser);
 
+
+//Patch
+router.patch('/:id', UsersController.patchUser);
+
+
 module.exports = router;
