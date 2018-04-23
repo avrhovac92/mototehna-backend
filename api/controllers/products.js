@@ -1,10 +1,16 @@
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 const Product = require('../models/product');
+const Multer = require("multer");
+
+
+
 
 exports.getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find()
-      .select('name price _id')
+      .select('name price _id category subCategory description productImage')
       .exec();
     return res.status(200).json({
       count: products.length,
@@ -20,7 +26,11 @@ exports.addProduct = async (req, res, next) => {
     const product = new Product({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
-      price: req.body.price
+      price: req.body.price,
+      category:req.body.category,
+      subCategory:req.body.subCategory,
+      description:req.body.description,
+      productImage:req.file.path
     });
     const result = await product.save();
     const { __v, ...savedProduct } = result._doc;
@@ -29,6 +39,8 @@ exports.addProduct = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
 
 exports.getProduct = async (req, res, next) => {
   try {
